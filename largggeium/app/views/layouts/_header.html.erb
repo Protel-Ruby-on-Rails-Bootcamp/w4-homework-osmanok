@@ -1,0 +1,15 @@
+<!-- Header for appliaction --> 
+
+<h1><%= link_to 'Largggeium', root_path %></h1>
+
+<p>
+  <% if user_signed_in? %>
+    <%= link_to 'Edit Profile', edit_user_registration_path %>|
+    <%= link_to 'New Post', new_post_path %> |
+    <%= link_to 'Signout', destroy_user_session_path, method: :delete %> | 
+    <b><%= current_user.username %></b>
+  <% else %>
+    <%= link_to 'Signup', new_user_registration_path %> |
+    <%= link_to 'Login', new_user_session_path %>
+  <% end %>
+</p>
