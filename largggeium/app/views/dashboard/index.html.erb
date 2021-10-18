@@ -1,0 +1,48 @@
+<h1>Dashboard</h1>
+
+<p id="notice"><%= notice %></p>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Visible to Other Users</th>
+      <th>Comments</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= post.status %></td>
+        <td><%= link_to "#{post.comments.count} Comments", post_comments_path(post) %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<% unless @comments.empty? %>
+  <h2>Comments</h2>
+
+  <h4>Comments Pending Approval</h4>
+  <ul>
+  <% @comments.each do |comment| %>
+    <li>
+      <%= comment.user.username %> wrote a comment your <%= comment.post.title %> post.
+      <%= link_to 'Click here to accept it.', post_comment_path(comment.post, comment) %>
+    </li>
+  <% end %>
+  </ul>
+
+  <h4>Approve Comments</h4>
+
+<% end %>
+

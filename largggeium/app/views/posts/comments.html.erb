@@ -1,0 +1,10 @@
+<% @posts.each do |post| %>
+  
+  <% if post.user == current_user %>   
+    <ul>
+      <% post.comments.each do |comment| %>
+        <li><%= comment.title %></li>
+      <% end %>
+    </ul>
+  <% end %>   
+<% end %>

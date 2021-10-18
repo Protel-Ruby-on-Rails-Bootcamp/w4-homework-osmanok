@@ -1,0 +1,9 @@
+<h1> <%= @post.title %> Comments </h1>
+
+<% @comments.each do |commnet| %>
+  <div>
+    <h3> <%= commnet.title %> </h3>
+    <p> <%= commnet.content %> </p>
+  </div>
+<% end %>
+  
