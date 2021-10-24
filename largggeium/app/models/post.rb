@@ -9,10 +9,6 @@ class Post < ApplicationRecord
   scope :recent, -> {order(created_at: :desc)}
 
   def status
-    if visible
-      'Public'
-    else
-      'Private'
-    end
+    visible ? '⭕️' : '❌'
   end
 end

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: %i[index show edit update destroy, comments]
-  before_action :is_user?, only: %i[ edit update destroy, comments ]
+  before_action :set_post, only: %i[ show edit update destroy up down ]
+  #before_action :authenticate_user!, only: %i[index show edit update destroy, comments]
+  #before_action :is_user?, only: %i[ edit update destroy, comments ]
 
   # GET /posts or /posts.json
   def index
@@ -21,6 +21,7 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
   end
+
 
   # POST /posts or /posts.json
   def create
@@ -59,6 +60,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def up
+    @post.increment!(:vote, 1)
+    redirect_to @post, notice: "Thank you for voting"
+  end
+
+  def down
+    @post.decrement!(:vote, 1)
+    redirect_to @post, notice: "Thank you for voting"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -75,4 +86,5 @@ class PostsController < ApplicationController
         redirect_to root_path notice: "Permission Denied"
       end
     end
+
 end

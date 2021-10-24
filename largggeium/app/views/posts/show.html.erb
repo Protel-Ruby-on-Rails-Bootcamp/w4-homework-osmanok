@@ -17,6 +17,11 @@
   <%= @post.visible %>
 </p>
 
+<h2>Vote</h2>
+<div id="vote_count">
+  <%= render 'vote' %>
+</div>
+
 <h2>Comments</h2>
 
 <% if @comments.any? %>

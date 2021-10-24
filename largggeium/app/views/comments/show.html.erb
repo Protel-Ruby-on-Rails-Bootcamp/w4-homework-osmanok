@@ -17,5 +17,5 @@
   <%= @comment.user.username %>
 </p>
 
-<%= link_to 'Accept', approve_post_comment_path(@comment.post, @comment), method: :patch %>
-<%= link_to 'Back', :back %>
+<%= button_to 'Accept', approve_post_comment_path(@comment.post, @comment), method: :patch %>
+<%= button_to 'Back', :back %>
