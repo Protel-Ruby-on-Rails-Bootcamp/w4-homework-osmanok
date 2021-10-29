@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="d-flex justify-content-center" ><%= @post.title %></h1>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<% if current_user == @post.user %>
+  <p>
+    <strong>Visible:</strong>
+    <%= @post.visible %>
+  </p>
+<% end %>
+
+
+<h2>Vote</h2>
+<div id="vote_count">
+  <%= render 'vote' %>
+</div>
+
+<h2>Comments</h2>
+
+<% if @comments.any? %>
+  <% @post.comments.each do |comment| %>
+    <% if comment.approved %>
+      <p><%= comment.title %></p>
+      <p><%= comment.content %></p>
+      <hr>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>There is no comment</p>
+<% end %>
+
+<% unless current_user == @post.user %>
+  <h2>Add a comment</h2>
+
+  <%= form_with model: [@post, @post.comments.build] do |form| %>
+    <p>
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </p>
+    <p>
+      <%= form.label :content %>
+      <%= form.text_area :content %>
+    </p>
+
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+<% end %>

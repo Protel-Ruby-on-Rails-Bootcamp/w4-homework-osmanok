@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @comment.post.title %> Post Comment</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%= @comment.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @comment.content %>
+</p>
+
+<p>
+  <strong>Written By:</strong>
+  <%= @comment.user.username %>
+</p>
+
+
+
+<% unless @comment.approved %>
+  <%= button_to 'Accept', approve_post_comment_path(@comment.post, @comment), method: :patch %>
+<% end %>
+
+<% if @comment.approved %>
+  <%= button_to 'Deny', deny_post_comment_path(@comment.post, @comment), method: :patch %>
+<% end %>
+
+

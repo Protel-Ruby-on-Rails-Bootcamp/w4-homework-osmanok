@@ -1,0 +1,39 @@
+<h1>username: <%= @user.username %></h1>
+
+<h2>email: <b> <%= @user.email %> </b></h2>
+
+<div>
+  <% if current_user == @user %>
+    <%= link_to 'Edit user', edit_user_registration_path %>
+  <% end %>
+</div>
+
+<div id="followers">
+  <b>Following (<%= @user.following.count %>)</b>
+  <b>Follower (<%= @user.followers.count %>)</b>
+</div>
+
+<% if user_signed_in? && @user != current_user %>
+  <p><%= render 'follow_form' %></p>
+<% end %>
+
+<h1>User Posts</h4>
+
+  <% @posts.each do |post| %>
+    <div border="5 px">
+      <h3><%= link_to post.title, post_path(post) %> <%= post.created_at %></h3>
+    </div>
+  <% end %>
+
+
+<% unless current_user == @user %>
+  
+<h2>User Comments</h2>
+
+  <% @comments.each do |comment| %>
+    <div border="5 px">
+      <h4><%= comment.title %> <%= comment.post.title %> <%= comment.created_at %></h4>
+    </div>
+  <% end %>
+  
+<% end %>  

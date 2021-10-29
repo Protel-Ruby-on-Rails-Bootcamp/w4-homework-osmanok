@@ -1,0 +1,9 @@
+<div class="btn-group">
+  <h4 id="count">Point: <%= @post.vote%> </h4>
+  
+  <% unless current_user == @post.user %>
+    <%= button_to '👍', up_post_url(@post), method: :patch, class: "btn"%> 
+    <%= button_to '👎', down_post_url(@post), method: :patch, class: "btn"%>
+  <% end %>
+  
+</div>
